@@ -1,0 +1,28 @@
+{% load bootstrap3 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+<div class="container">
+
+  {% include "qa/header.html" %}
+
+  {% if message %}
+  <strong>Enter a valid Question!</strong>
+  {% endif %}
+
+
+
+  <form id="add_q" method="post" action="/qanda/add/">
+    {% csrf_token %}
+    <input class="input-lg" style="width:100%" placeholder="Enter your question....." type="text" name="question"/> <br/><br/>
+
+    <input class="input-lg" style="width:100%" placeholder="Enter tags separates by comma!" type="text" name="tags"/> <br/><br/>
+    <input type="hidden" value="{{ user.id }}" name="user" />
+    <div align="right"><input class="btn btn-primary" type="submit" value="Submit Question" /></div>
+    
+  </form>
+
+</div>
+
+

@@ -1,0 +1,19 @@
+<div class="container">
+
+  {% include "qa/header.html" %}
+
+  {% if message %}
+  <strong>Enter a valid comment!</strong>
+  {% endif %}
+
+  <form id="add_q" method="post" action="/qanda/comment/{{ answer_id }}/">
+    {% csrf_token %}
+    <input class="input-lg" style="width:100%" placeholder="Enter your comment....." type="text" name="comment"/> <br/><br/>
+    <input type="hidden" value="{{ user.id }}" name="user" />
+    <input class="btn btn-primary" type="submit" value="Submit Comment" />
+  </form>
+
+
+</div>
+
+

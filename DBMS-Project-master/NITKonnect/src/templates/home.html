@@ -1,0 +1,86 @@
+{% extends "baseLSH.html" %}
+
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}{{ block.super }}Home{% endblock %}
+
+{% block navbar-left %}
+  {% include "_navbar.html" with active_link="home" %}
+{% endblock %}
+
+{% block navbar-right %}
+  {% if not user.is_authenticated %}
+<a class="btn btn-primary" href="{% url 'accounts:login' %}" role="button">Log in</a>
+<a class="btn btn-primary" href="{% url 'accounts:signup' %}" role="button">Sign up</a>
+  {% else %}
+    {{ block.super }}
+  {% endif %}
+{% endblock %}
+
+{% block splash %}
+  <div class="jumbotron jumbotron-carousel corporate-jumbo">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-sm-8">
+          <h1>{% include "_brandname.html" %}</h1>
+	  <a class="btn btn-primary" href="http://nitk.ac.in/" role="button">NITK</a>
+        </div>
+        <div class="col-md-4 col-sm-4">
+
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock splash %}
+
+{% block container %}
+<!-- Benefits of the Django application -->
+<a name="about"></a>
+
+<center>
+<div class="container">
+  <div class="row">
+
+    <div class="4u">
+      <br><br>
+      <img src= "{% static 'images/chat.png' %}" alt="HTML5 Icon" style="width:64px;height:64px;">
+      <h2>Chats</h2><br>
+      <p>Connect with  your friends and exchange personal messages.</p><br>
+      {% if user.is_authenticated %}
+        <p><a class="btn btn-lg btn-primary btn-block" href="{% url 'pinax_messages:inbox' %}" role="button">Chats &raquo;</a></p>
+      {% else %}
+        <p><a class="btn btn-lg btn-primary btn-block" href="/login" role="button">Chats &raquo;</a></p>
+      {% endif %}
+    </div>
+  
+    <div class="4u">
+      <br><br>
+      <img src= "{% static 'images/blog.png' %}" alt="HTML5 Icon" style="width:64px;height:64px;">
+      <h2>Blog</h2><br>
+      <p>View the NITK blog to find out what is going on in the campus.</p><br>
+      <p><a class="btn btn-lg btn-primary btn-block" href="/blog" role="button">Blog &raquo;</a></p>
+    </div>
+  
+    <div class="4u">
+      <br><br>
+      <img src= "{% static 'images/question.png' %}" alt="HTML5 Icon" style="width:64px;height:64px;">
+      <h2>Q & A</h2><br>
+      <p>Have a question ? Ask your friends here.</p><br><br>
+      {% if user.is_authenticated %}
+        <p><a class="btn btn-lg btn-primary btn-block" href="/qanda" role="button">Q & A &raquo;</a></p>
+      {% else %}
+        <p><a class="btn btn-lg btn-primary btn-block" href="/login" role="button">Q & A &raquo;</a></p>
+      {% endif %}
+    </div>
+  
+  </div>
+</div>
+</center>
+
+{% endblock container %}
+
+{% block scripts %}
+<script src="{% static 'site/js/site.js' %}"></script>
+{% endblock scripts %}
+
